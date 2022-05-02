@@ -4,9 +4,21 @@
 
     <v-navigation-drawer v-model="drawer" fixed app>
       <v-sheet color="grey darken-4" class="pa-4">
-        <v-avatar class="mb-4" color="grey darken-1" size="64"></v-avatar>
-
-        <div>john@vuetifyjs.com</div>
+        <div v-if="false">
+          <v-avatar class="mb-4" color="grey darken-1" size="64"></v-avatar>
+          <div>john@vuetifyjs.com</div>
+        </div>
+        <div v-else>
+          <v-btn
+            to="/signin"
+            class="mb-4"
+            color="blue darken-1"
+            width="100%"
+            height="64"
+            >Sign in</v-btn
+          >
+          <div>サインインをするとより多くの機能が使えます。</div>
+        </div>
       </v-sheet>
 
       <v-divider></v-divider>
@@ -54,20 +66,30 @@ export default {
   name: 'DefaultLayout',
   data() {
     return {
-      title: 'AnimaTracker',
+      title: 'AnimaTracker (アニマトラッカー)',
 
-      drawer: true,
+      drawer: false,
 
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
+          icon: 'mdi-home',
+          title: 'トップページ',
           to: '/',
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
+          icon: 'mdi-apps',
+          title: 'データ入力',
+          to: '/input',
+        },
+        {
+          icon: 'mdi-history',
+          title: 'データ履歴',
+          to: '/history',
+        },
+        {
+          icon: 'mdi-chart-box',
+          title: 'データ解析',
+          to: '/Analysis',
         },
       ],
     }
