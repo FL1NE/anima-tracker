@@ -4,7 +4,12 @@
 
     <v-navigation-drawer v-model="drawer" fixed app>
       <v-sheet color="grey darken-4" class="pa-4">
-        <div v-if="false">
+        <div>
+          <h2>AnimaTracker</h2>
+          <h3>Version X.Y.Z</h3>
+        </div>
+        <!-- WIP: ログイン昨日作ったら作る -->
+        <!-- <div v-if="false">
           <v-avatar class="mb-4" color="grey darken-1" size="64"></v-avatar>
           <div>john@vuetifyjs.com</div>
         </div>
@@ -17,8 +22,8 @@
             height="64"
             >Sign in</v-btn
           >
-          <div>サインインをするとより多くの機能が使えます。</div>
-        </div>
+          <div>サインインをするとより多くの機能が使えます。</div> -->
+        <!-- </div> -->
       </v-sheet>
 
       <v-divider></v-divider>
