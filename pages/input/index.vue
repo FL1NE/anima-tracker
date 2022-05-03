@@ -120,9 +120,17 @@
     <h2>Games played: {{ $store.state.currentSession.data.length }}</h2>
     <h2>Overall count: {{ calculatedData.overallCount }}</h2>
 
-    <v-btn color="red accent-2" @click="clearDataDialog = !clearDataDialog"
-      >CLEAR ALL DATA</v-btn
-    >
+    <div class="pt-8">
+      <v-btn color="red darken-1" @click="$store.dispatch('clearCurrentInput')"
+        >Clear Current Input</v-btn
+      >
+    </div>
+
+    <div class="pt-8">
+      <v-btn color="red darken-4" @click="clearDataDialog = !clearDataDialog"
+        >CLEAR ALL DATA</v-btn
+      >
+    </div>
 
     <h1 class="pt-12">DEBUG</h1>
 

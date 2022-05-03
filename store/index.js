@@ -58,6 +58,11 @@ export const actions = {
       ctx.commit('setCurrentInputData', [])
     }
   },
+
+  clearCurrentInput: (ctx) => {
+    ctx.commit('clearCurrentInput')
+  },
+
   clearAllData: (ctx) => {
     ctx.commit('clearCurrentInput')
     ctx.commit('clearCurrentSession')
