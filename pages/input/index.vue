@@ -116,11 +116,15 @@
       </v-col>
     </v-row>
 
-    <h1>STATS</h1>
+    <h1 class="pt-12">STATS</h1>
     <h2>Games played: {{ $store.state.currentSession.data.length }}</h2>
     <h2>Overall count: {{ calculatedData.overallCount }}</h2>
 
-    <h1>DEBUG</h1>
+    <v-btn color="red accent-2" @click="clearDataDialog = !clearDataDialog"
+      >CLEAR ALL DATA</v-btn
+    >
+
+    <h1 class="pt-12">DEBUG</h1>
 
     <h2>Session data</h2>
     <v-card
@@ -139,6 +143,35 @@
     <v-card v-for="(value, name) in calculatedData" :key="'data' + name">
       <div>{{ name }}: {{ value }}</div>
     </v-card>
+
+    <!-- ----------------------------------------------------------------------- -->
+
+    <v-dialog v-model="clearDataDialog" max-width="500px">
+      <v-card>
+        <v-card-title class="text-h5 red lighten-1">
+          CLEAR ALL DATA?
+        </v-card-title>
+
+        <v-card-text>
+          <div class="text-h5 pt-12">
+            Clear all data will delete all your progress saved.
+          </div>
+          <div class="text-h5">Are you sure want to delete?</div>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="error" dark large @click="clearAllData()">
+            YES, DELETE
+          </v-btn>
+
+          <v-btn text color="primary" @click="clearDataDialog = false">
+            CANCEL
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -147,6 +180,7 @@ export default {
   name: 'InspirePage',
   data() {
     return {
+      clearDataDialog: false,
       colorGrad: [
         // '',
         'red lighten-5 black--text',
@@ -171,6 +205,10 @@ export default {
     btnPress(n) {
       this.$store.dispatch('numberInput', n)
       // console.log('numberInput: ' + n)
+    },
+    clearAllData() {
+      this.$store.dispatch('clearAllData')
+      this.clearDataDialog = false
     },
   },
 }
@@ -228,7 +266,6 @@ export default {
   max-width: 960px;
   margin-left: calc(auto - 15px);
   margin-right: calc(auto - 15px);
-  margin-bottom: 24px;
 }
 
 .grid-row {

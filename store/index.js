@@ -34,6 +34,15 @@ export const mutations = {
     })
   },
 
+  clearCurrentInput: (state) => {
+    state.currentInput = []
+  },
+
+  clearCurrentSession: (state) => {
+    state.currentSession = {
+      data: [],
+    }
+  },
   // addNumberMutation: (state, number) => {
   //   state.inputHistory.push(number)
   // },
@@ -49,7 +58,10 @@ export const actions = {
       ctx.commit('setCurrentInputData', [])
     }
   },
-  clearCurrentSession: (ctx) => {},
+  clearAllData: (ctx) => {
+    ctx.commit('clearCurrentInput')
+    ctx.commit('clearCurrentSession')
+  },
 }
 
 // 計算とか
