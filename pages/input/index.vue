@@ -135,6 +135,12 @@
       >
     </div>
 
+    <div class="pt-8">
+      <v-btn color="red darken-1" @click="downloadCurrentSessionJson()"
+        >Export session data as json</v-btn
+      >
+    </div>
+
     <h1 class="pt-12">DEBUG</h1>
 
     <h2>Session data</h2>
@@ -220,6 +226,18 @@ export default {
     clearAllData() {
       this.$store.dispatch('clearAllData')
       this.clearDataDialog = false
+    },
+    downloadCurrentSessionJson() {
+      const blob = new Blob(
+        [JSON.stringify(this.$store.state.currentSession, null, '  ')],
+        { type: 'application/json' }
+      )
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'sample.json'
+      link.click()
+      URL.revokeObjectURL(url)
     },
   },
 }
