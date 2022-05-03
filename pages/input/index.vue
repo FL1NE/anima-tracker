@@ -209,6 +209,8 @@ export default {
         'red darken-2 white--text',
         'red darken-3 white--text',
         'red darken-4 white--text',
+        'orange darken-4 white--text',
+        'amber darken-3 white--text',
         'amber white--text',
       ],
     }
