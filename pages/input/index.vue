@@ -83,38 +83,41 @@
       </v-col>
     </v-row>
 
-    <v-row class="grid-component">
-      <v-col v-for="n in 25" :key="n" class="grid-row">
-        <v-card>
-          <v-responsive :aspect-ratio="1 / 1">
-            <v-btn
-              class="grid-number"
-              :class="
-                colorGrad[
-                  Math.round(
-                    calculatedData.foundColorRateArray[n - 1] *
-                      (colorGrad.length - 1)
-                  )
-                ]
-              "
-              height="100%"
-              @click="btnPress(n)"
+    <div class="decontainer">
+      <v-row class="grid-component">
+        <v-col v-for="n in 25" :key="n" class="grid-row">
+          <v-card>
+            <v-responsive :aspect-ratio="1 / 1">
+              <v-btn
+                class="grid-number"
+                :class="
+                  colorGrad[
+                    Math.round(
+                      calculatedData.foundColorRateArray[n - 1] *
+                        (colorGrad.length - 1)
+                    )
+                  ]
+                "
+                height="100%"
+                @click="btnPress(n)"
+              >
+                {{ n }}
+              </v-btn>
+            </v-responsive>
+            <v-card class="disable-zoom">{{
+              calculatedData.foundCountArray[n - 1]
+            }}</v-card>
+            <v-card class="disable-zoom"
+              >{{
+                Math.round(calculatedData.foundRateArray[n - 1] * 100 * 100) /
+                100
+              }}
+              %</v-card
             >
-              {{ n }}
-            </v-btn>
-          </v-responsive>
-          <v-card class="disable-zoom">{{
-            calculatedData.foundCountArray[n - 1]
-          }}</v-card>
-          <v-card class="disable-zoom"
-            >{{
-              Math.round(calculatedData.foundRateArray[n - 1] * 100 * 100) / 100
-            }}
-            %</v-card
-          >
-        </v-card>
-      </v-col>
-    </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
 
     <h1 class="pt-12">STATS</h1>
     <h2>Games played: {{ $store.state.currentSession.data.length }}</h2>
@@ -269,11 +272,16 @@ export default {
   width: 100%;
 }
 
+.decontainer {
+  margin-top: 15px;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
 .grid-component {
-  /* touch-action: manipulation; */
   max-width: 960px;
-  margin-left: calc(auto - 15px);
-  margin-right: calc(auto - 15px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .grid-row {
@@ -286,9 +294,5 @@ export default {
 .grid-number {
   width: 100%;
   height: 100%;
-}
-
-.disable-zoom {
-  /* touch-action: manipulation; */
 }
 </style>
