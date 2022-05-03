@@ -17,6 +17,11 @@ export default {
   ssr: false,
   target: 'static',
 
+  // Allow access by IP
+  server: {
+    host: '0.0.0.0',
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 

@@ -1,37 +1,234 @@
 <template>
   <div>
-    <span>{{ $store.state.inputHistory }}</span>
+    <v-row class="lotta-display">
+      <v-col class="lotta-display-cols">
+        <v-responsive
+          class="lotta-display-child lotta-display-1st"
+          :aspect-ratio="1 / 1"
+        >
+          <span class="lotta-display-text">{{
+            $store.state.currentInput[0]
+          }}</span>
+        </v-responsive>
+      </v-col>
+      <v-col class="lotta-display-cols">
+        <v-responsive
+          class="lotta-display-child lotta-display-1st"
+          :aspect-ratio="1 / 1"
+        >
+          <span class="lotta-display-text">{{
+            $store.state.currentInput[1]
+          }}</span>
+        </v-responsive>
+      </v-col>
+      <v-col class="lotta-display-cols">
+        <v-responsive
+          class="lotta-display-child lotta-display-1st"
+          :aspect-ratio="1 / 1"
+        >
+          <span class="lotta-display-text">{{
+            $store.state.currentInput[2]
+          }}</span>
+        </v-responsive>
+      </v-col>
+      <v-col class="lotta-display-cols">
+        <v-responsive
+          class="lotta-display-child lotta-display-2nd"
+          :aspect-ratio="1 / 1"
+        >
+          <span class="lotta-display-text">{{
+            $store.state.currentInput[3]
+          }}</span>
+        </v-responsive>
+      </v-col>
+      <v-col class="lotta-display-cols">
+        <v-responsive
+          class="lotta-display-child lotta-display-2nd"
+          :aspect-ratio="1 / 1"
+        >
+          <span class="lotta-display-text">{{
+            $store.state.currentInput[4]
+          }}</span>
+        </v-responsive>
+      </v-col>
+      <v-col class="lotta-display-cols">
+        <v-responsive
+          class="lotta-display-child lotta-display-3rd"
+          :aspect-ratio="1 / 1"
+        >
+          <span class="lotta-display-text">{{
+            $store.state.currentInput[5]
+          }}</span>
+        </v-responsive>
+      </v-col>
+      <v-col class="lotta-display-cols">
+        <v-responsive
+          class="lotta-display-child lotta-display-4th"
+          :aspect-ratio="1 / 1"
+        >
+          <span class="lotta-display-text">{{
+            $store.state.currentInput[6]
+          }}</span>
+        </v-responsive>
+      </v-col>
+      <v-col class="lotta-display-cols">
+        <v-responsive
+          class="lotta-display-child lotta-display-5th"
+          :aspect-ratio="1 / 1"
+        >
+          <span class="lotta-display-text">{{
+            $store.state.currentInput[7]
+          }}</span>
+        </v-responsive>
+      </v-col>
+    </v-row>
+
     <v-row class="grid-component">
       <v-col v-for="n in 25" :key="n" class="grid-row">
         <v-card>
           <v-responsive :aspect-ratio="1 / 1">
-            <v-btn class="grid-number" height="100%" @click="btnPress(n)">
+            <v-btn
+              class="grid-number"
+              :class="
+                colorGrad[
+                  Math.round(
+                    calculatedData.foundColorRateArray[n - 1] *
+                      (colorGrad.length - 1)
+                  )
+                ]
+              "
+              height="100%"
+              @click="btnPress(n)"
+            >
               {{ n }}
             </v-btn>
           </v-responsive>
-          <v-card>10000</v-card>
-          <v-card>99.99%</v-card>
+          <v-card class="disable-zoom">{{
+            calculatedData.foundCountArray[n - 1]
+          }}</v-card>
+          <v-card class="disable-zoom"
+            >{{
+              Math.round(calculatedData.foundRateArray[n - 1] * 100 * 100) / 100
+            }}
+            %</v-card
+          >
         </v-card>
       </v-col>
     </v-row>
+
+    <h1>STATS</h1>
+    <h2>Games played: {{ $store.state.currentSession.data.length }}</h2>
+    <h2>Overall count: {{ calculatedData.overallCount }}</h2>
+
+    <h1>DEBUG</h1>
+
+    <h2>Session data</h2>
+    <v-card
+      v-for="(value, name) in $store.state.currentSession.data"
+      :key="name"
+    >
+      <div>{{ name }}: {{ value }}</div>
+    </v-card>
+
+    <h2>State data</h2>
+    <v-card v-for="(value, name) in $store.state" :key="'state' + name">
+      <div>{{ name }}: {{ value }}</div>
+    </v-card>
+
+    <h2>Calculated data</h2>
+    <v-card v-for="(value, name) in calculatedData" :key="'data' + name">
+      <div>{{ name }}: {{ value }}</div>
+    </v-card>
   </div>
 </template>
 
 <script>
 export default {
   name: 'InspirePage',
+  data() {
+    return {
+      colorGrad: [
+        // '',
+        'red lighten-5 black--text',
+        'red lighten-4 black--text',
+        'red lighten-3 black--text',
+        'red lighten-2 black--text',
+        'red lighten-1 black--text',
+        'red darken-1 white--text',
+        'red darken-2 white--text',
+        'red darken-3 white--text',
+        'red darken-4 white--text',
+        'amber white--text',
+      ],
+    }
+  },
+  computed: {
+    calculatedData() {
+      return this.$store.getters.calculatedData
+    },
+  },
   methods: {
     btnPress(n) {
-      this.$store.commit('addNumberMutation', n)
-      console.log(n)
+      this.$store.dispatch('numberInput', n)
+      // console.log('numberInput: ' + n)
     },
   },
 }
 </script>
 
 <style scoped>
-.grid-component {
+.lotta-display {
   max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+}
+
+.lotta-display-cols {
+  margin: -10px;
+}
+
+.lotta-display-child {
+  text-align: center;
+  position: relative;
+  border-radius: 100px;
+  border: 0.125em solid white;
+}
+
+.lotta-display-1st {
+  background-color: #ff6f00;
+}
+
+.lotta-display-2nd {
+  background-color: #bf360c;
+}
+
+.lotta-display-3rd {
+  background-color: #b71c1c;
+}
+
+.lotta-display-4th {
+  background-color: #880e4f;
+}
+
+.lotta-display-5th {
+  background-color: #4a148c;
+}
+
+.lotta-display-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.grid-component {
+  /* touch-action: manipulation; */
+  max-width: 960px;
+  margin-left: calc(auto - 15px);
+  margin-right: calc(auto - 15px);
+  margin-bottom: 24px;
 }
 
 .grid-row {
@@ -44,5 +241,9 @@ export default {
 .grid-number {
   width: 100%;
   height: 100%;
+}
+
+.disable-zoom {
+  /* touch-action: manipulation; */
 }
 </style>
