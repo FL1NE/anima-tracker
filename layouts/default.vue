@@ -5,6 +5,9 @@
     <v-navigation-drawer v-model="drawer" fixed app>
       <v-sheet color="grey darken-4" class="pa-4">
         <div>
+          <img src="~/assets/images/anima.png" height="64" />
+        </div>
+        <div>
           <h2>AnimaTracker</h2>
           <h3>Version X.Y.Z</h3>
         </div>
