@@ -151,9 +151,13 @@
       >
     </div>
 
+    <!-- ======================================================================= -->
+    <!-- DEBUG -->
+    <!-- ======================================================================= -->
+
     <h1 class="pt-12">DEBUG (開発・デバッグ用)</h1>
 
-    <h2>Session data</h2>
+    <h2 class="pt-4">Session data</h2>
     <v-card
       v-for="(value, name) in $store.state.currentSession.data"
       :key="name"
@@ -161,13 +165,18 @@
       <div>{{ name }}: {{ value }}</div>
     </v-card>
 
-    <h2>State data</h2>
-    <v-card v-for="(value, name) in $store.state" :key="'state' + name">
+    <h2 class="pt-4">Session info</h2>
+    <v-card v-for="(value, name) in $store.state.currentSession" :key="name">
       <div>{{ name }}: {{ value }}</div>
     </v-card>
 
-    <h2>Calculated data</h2>
+    <h2 class="pt-4">Calculated data</h2>
     <v-card v-for="(value, name) in calculatedData" :key="'data' + name">
+      <div>{{ name }}: {{ value }}</div>
+    </v-card>
+
+    <h2 class="pt-4">State data</h2>
+    <v-card v-for="(value, name) in $store.state" :key="'state' + name">
       <div>{{ name }}: {{ value }}</div>
     </v-card>
 

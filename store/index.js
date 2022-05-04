@@ -1,15 +1,18 @@
+import { v4 as uuidv4 } from 'uuid'
+
 export const state = () => ({
   currentInput: [],
 
   currentSession: {
-    // id: "",
-    // title: "",
-    // description: "",
+    id: uuidv4(),
+    title: '',
+    description: '',
+    bookmark: false,
     data: [
       // { data: [], createdAt: ""}
     ],
-    // createdAt: "",
-    // updatedAt: ""
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 
   // sessionHistories: [],
@@ -19,6 +22,9 @@ export const state = () => ({
 
 // Mutationsはstateのセッター以外の役割を持たない
 export const mutations = {
+  // ---------------------------------------------------------------------------
+  // currentInput関連
+  // ---------------------------------------------------------------------------
   setCurrentInputData: (state, array) => {
     state.currentInput = array
   },
@@ -32,15 +38,27 @@ export const mutations = {
       data: state.currentInput,
       createdAt: new Date().toISOString(),
     })
+    state.currentSession.updatedAt = new Date().toISOString()
   },
 
-  clearCurrentInput: (state) => {
+  clearCurrentInputData: (state) => {
     state.currentInput = []
   },
 
-  clearCurrentSession: (state) => {
+  // ---------------------------------------------------------------------------
+  // currentSession関連
+  // ---------------------------------------------------------------------------
+  clearCurrentSessionData: (state) => {
     state.currentSession = {
-      data: [],
+      id: uuidv4(),
+      title: '',
+      description: '',
+      bookmark: false,
+      data: [
+        // { data: [], createdAt: ""}
+      ],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     }
   },
 
@@ -64,12 +82,12 @@ export const actions = {
   },
 
   clearCurrentInput: (ctx) => {
-    ctx.commit('clearCurrentInput')
+    ctx.commit('clearCurrentInputData')
   },
 
   clearAllData: (ctx) => {
-    ctx.commit('clearCurrentInput')
-    ctx.commit('clearCurrentSession')
+    ctx.commit('clearCurrentInputData')
+    ctx.commit('clearCurrentSessionData')
   },
 
   overwriteCurrentSession: (ctx, payload) => {

@@ -89,11 +89,11 @@ export default {
           title: 'データ入力',
           to: '/input',
         },
-        // {
-        //   icon: 'mdi-history',
-        //   title: 'データ入力履歴',
-        //   to: '/history',
-        // },
+        {
+          icon: 'mdi-history',
+          title: 'セッション履歴',
+          to: '/sessions',
+        },
         // {
         //   icon: 'mdi-chart-box',
         //   title: 'データ解析',
