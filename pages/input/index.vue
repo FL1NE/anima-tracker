@@ -119,25 +119,25 @@
       </v-row>
     </div>
 
-    <h1 class="pt-12">STATS</h1>
-    <h2>Games played: {{ $store.state.currentSession.data.length }}</h2>
-    <h2>Overall count: {{ calculatedData.overallCount }}</h2>
+    <h1 class="pt-12">統計情報</h1>
+    <h2>ゲームのプレイ数: {{ $store.state.currentSession.data.length }}</h2>
+    <h2>総抽選回数: {{ calculatedData.overallCount }}</h2>
 
     <div class="pt-8">
       <v-btn color="red darken-1" @click="$store.dispatch('clearCurrentInput')"
-        >Clear Current Input</v-btn
+        >現在の入力を削除</v-btn
       >
     </div>
 
     <div class="pt-8">
       <v-btn color="red darken-4" @click="clearDataDialog = !clearDataDialog"
-        >CLEAR ALL DATA</v-btn
+        >全てのデータの削除</v-btn
       >
     </div>
 
     <div class="pt-8">
       <v-btn color="amber darken-4" @click="downloadCurrentSessionJson()"
-        >Export session data as json</v-btn
+        >データのエクスポート (.json)</v-btn
       >
     </div>
 
@@ -146,11 +146,11 @@
         color="green darken-3"
         :loading="isFileSelecting"
         @click="ImportJsonToCurrentSession()"
-        >Import session data from json</v-btn
+        >データのインポート (.json)</v-btn
       >
     </div>
 
-    <h1 class="pt-12">DEBUG</h1>
+    <h1 class="pt-12">DEBUG (開発・デバッグ用)</h1>
 
     <h2>Session data</h2>
     <v-card
@@ -184,25 +184,25 @@
     <v-dialog v-model="clearDataDialog" max-width="500px">
       <v-card>
         <v-card-title class="text-h5 red lighten-1">
-          CLEAR ALL DATA?
+          全てのデータを削除しますか？
         </v-card-title>
 
         <v-card-text>
-          <div class="text-h5 pt-12">
-            Clear all data will delete all your progress saved.
+          <div class="text-h5 pt-8">
+            全てのデータを削除すると過去の履歴含め初期状態に戻ります
           </div>
-          <div class="text-h5">Are you sure want to delete?</div>
+          <div class="text-h5">データの削除を実行しますか？</div>
         </v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
 
           <v-btn color="error" dark large @click="clearAllData()">
-            YES, DELETE
+            はい、データを削除します
           </v-btn>
 
           <v-btn text color="primary" @click="clearDataDialog = false">
-            CANCEL
+            キャンセル
           </v-btn>
         </v-card-actions>
       </v-card>

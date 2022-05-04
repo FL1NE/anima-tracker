@@ -89,16 +89,16 @@ export default {
           title: 'データ入力',
           to: '/input',
         },
-        {
-          icon: 'mdi-history',
-          title: 'データ入力履歴',
-          to: '/history',
-        },
-        {
-          icon: 'mdi-chart-box',
-          title: 'データ解析',
-          to: '/Analysis',
-        },
+        // {
+        //   icon: 'mdi-history',
+        //   title: 'データ入力履歴',
+        //   to: '/history',
+        // },
+        // {
+        //   icon: 'mdi-chart-box',
+        //   title: 'データ解析',
+        //   to: '/Analysis',
+        // },
       ],
     }
   },
