@@ -91,7 +91,7 @@ export default {
         },
         {
           icon: 'mdi-history',
-          title: 'データ履歴',
+          title: 'データ入力履歴',
           to: '/history',
         },
         {

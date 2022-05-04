@@ -290,7 +290,7 @@ export default {
         // console.log(e);
         // result = 成型済みのjsonデータ、これで置き換える
         const result = JSON.parse(e.target.result)
-        console.log(result)
+        // console.log(result)
 
         // const formatted = JSON.stringify(result, null, 2);
 
