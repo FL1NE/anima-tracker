@@ -98,6 +98,7 @@
                     )
                   ]
                 "
+                :disabled="$store.state.currentInput.includes(n)"
                 height="100%"
                 @click="btnPress(n)"
               >
