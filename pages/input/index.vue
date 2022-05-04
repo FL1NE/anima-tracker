@@ -136,8 +136,17 @@
     </div>
 
     <div class="pt-8">
-      <v-btn color="red darken-1" @click="downloadCurrentSessionJson()"
+      <v-btn color="amber darken-4" @click="downloadCurrentSessionJson()"
         >Export session data as json</v-btn
+      >
+    </div>
+
+    <div class="pt-8">
+      <v-btn
+        color="green darken-3"
+        :loading="isFileSelecting"
+        @click="ImportJsonToCurrentSession()"
+        >Import session data from json</v-btn
       >
     </div>
 
@@ -163,6 +172,15 @@
 
     <!-- ----------------------------------------------------------------------- -->
 
+    <input
+      ref="uploader"
+      class="d-none"
+      type="file"
+      accept="application/json"
+      @change="onFileChanged"
+    />
+
+    <!-- ----------------------------------------------------------------------- -->
     <v-dialog v-model="clearDataDialog" max-width="500px">
       <v-card>
         <v-card-title class="text-h5 red lighten-1">
@@ -198,6 +216,8 @@ export default {
   data() {
     return {
       clearDataDialog: false,
+      isFileSelecting: false,
+      selectedFile: null,
       colorGrad: [
         // '',
         'red lighten-5 black--text',
@@ -240,6 +260,46 @@ export default {
       link.download = 'sample.json'
       link.click()
       URL.revokeObjectURL(url)
+    },
+    ImportJsonToCurrentSession() {
+      this.isFileSelecting = true
+      // After obtaining the focus when closing the FilePicker, return the button state to normal
+      window.addEventListener(
+        'focus',
+        () => {
+          this.isFileSelecting = false
+        },
+        { once: true }
+      )
+
+      // Trigger click on the FileInput
+      this.$refs.uploader.click()
+    },
+    onFileChanged(e) {
+      this.selectedFile = e.target.files[0]
+      // Do whatever you need with the file, liek reading it with FileReader
+      // console.log(this.selectedFile)
+      if (this.selectedFile.length <= 0) {
+        return false
+      }
+      const fr = new FileReader()
+
+      const storeHandler = this.$store
+
+      fr.onload = function (e) {
+        // console.log(e);
+        // result = 成型済みのjsonデータ、これで置き換える
+        const result = JSON.parse(e.target.result)
+        console.log(result)
+
+        // const formatted = JSON.stringify(result, null, 2);
+
+        storeHandler.dispatch('overwriteCurrentSession', result)
+        // document.getElementById('result').value = formatted;
+        // console.log(formatted)
+      }
+
+      fr.readAsText(this.selectedFile)
     },
   },
 }

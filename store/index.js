@@ -43,6 +43,10 @@ export const mutations = {
       data: [],
     }
   },
+
+  replaceCurrentSessionData: (state, data) => {
+    state.currentSession = data
+  },
   // addNumberMutation: (state, number) => {
   //   state.inputHistory.push(number)
   // },
@@ -66,6 +70,10 @@ export const actions = {
   clearAllData: (ctx) => {
     ctx.commit('clearCurrentInput')
     ctx.commit('clearCurrentSession')
+  },
+
+  overwriteCurrentSession: (ctx, payload) => {
+    ctx.commit('replaceCurrentSessionData', payload)
   },
 }
 
